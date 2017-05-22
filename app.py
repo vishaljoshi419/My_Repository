@@ -38,7 +38,7 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") != "SAPCloudConnector":
         return {}
-    baseurl = "https://query.yahooapis.com/v1/public/yql?"
+    baseurl = "https://my302850.crm.ondemand.com/sap/c4c/odata/v1/c4codata/ServiceRequestCollection/$filter=ID eq '1274796'"
     yql_query = makeYqlQuery(req)
     if yql_query is None:
         return {}
@@ -50,14 +50,14 @@ def processRequest(req):
 
 
 def makeYqlQuery(req):
-    result = req.get("result")
-    parameters = result.get("parameters")
-    city = parameters.get("geo-city")
-    if city is None:
-        return None
+    #result = req.get("result")
+    #parameters = result.get("parameters")
+    #city = parameters.get("geo-city")
+    #if city is None:
+    #    return None
 
-    return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
-
+    #return "select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='" + city + "')"
+    return req
 
 def makeWebhookResult(data):
     query = data.get('query')
